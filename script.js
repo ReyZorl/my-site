@@ -8,10 +8,26 @@ window.addEventListener('scroll', () => {
         const sectionHeight = section.offsetHeight;
         const scrollPosition = window.scrollY;
 
+        // Прокрутка и изменение цвета навигации
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             navLinks[index].style.color = '#f39c12';
+            navLinks[index].style.transform = 'scale(1.2)';
         } else {
-            navLinks[index].style.color = 'white';
+            navLinks[index].style.color = '#fff';
+            navLinks[index].style.transform = 'scale(1)';
         }
+    });
+});
+
+// Плавная прокрутка до секции при клике на ссылку
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        window.scrollTo({
+            top: targetSection.offsetTop - 50,
+            behavior: 'smooth'
+        });
     });
 });
